@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper-wrap" :style="{width: swiperWidth + 'px', height: swiperHeight + 'px'}">
+  <div class="swiper-wrap" :style="{width: width + 'px', height: height + 'px'}">
     <ul class="swiper" :style="swiperStyle"
     @touchstart="handleTouchStart"
     @touchmove="handleTouchMove"
@@ -7,7 +7,7 @@
       <li class="swiper-item"
       v-for="(item, index) in imgList"
       :key="index">
-        <img :src="item" :style="{width: swiperWidth + 'px', height: swiperHeight + 'px'}" />
+        <img :src="item" :style="{width: width + 'px', height: height + 'px'}" />
       </li>
     </ul>
 
@@ -30,12 +30,12 @@
         }
       },
       // swiper's width
-      swiperWidth: {
+      width: {
         type: Number,
         default: 375
       },
       // swiper's height
-      swiperHeight: Number,
+      height: Number,
       //slide timing ms
       interval: {
         type: Number,
@@ -45,6 +45,10 @@
       animDuration: {
         type: Number,
         default: 500
+      },
+      slide: {
+        type: Number,
+        default: 50
       }
     },
     data() {
@@ -159,7 +163,7 @@
       },
 
       handleTouchEnd() {
-        if(Math.abs(this.distance) > 50) {
+        if(Math.abs(this.distance) > this.slide) {
           if(this.distance > 0) {
             this.currentIndex--;
           } else {
@@ -172,10 +176,7 @@
         this.timingStart();
 
       }
-
-
     }
-
   }
 
 </script>
